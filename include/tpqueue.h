@@ -33,8 +33,7 @@ void push(const T& data) {
      if (data.prior > head->data.prior) {
       item->next = head;
       head = item;
-     }
-     if {
+     } else {
       Item* curr = head;
       while (curr->next && curr->next->data.prior >= data.prior) {
        curr = curr->next;
