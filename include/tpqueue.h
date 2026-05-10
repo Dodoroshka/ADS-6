@@ -27,31 +27,34 @@ class TPQueue {
     }
     void push(const T& data) {
         Item* item = create(data);
-        if (!head)
-            head = tail = item;
+        if (!head) {
+         head = tail = item;
+        }
         else if (head->data.prior > data.prior) {
-         item->next = head;
-         head = item;
+            item->next = head;
+            head = item;
         } else {
          Item* curr = head;
-         while (curr->next != nullptr && curr->next->data.prior <= data.prior)
-          curr = curr->next;
+         while (curr->next && curr->next->data.prior <= data.prior)
+                curr = curr->next;
          item->next = curr->next;
          curr->next = item;
          if (item->next == nullptr)
           tail = item;
         }
     }
-    void pop() {
-        if (!head) {
-            throw std::string("Empty");
-        }
-        Item* temp = head->next;
-        delete head;
-        head = temp;
-        if (!head) {
-            tail = nullptr;
-        }
+    T pop() {
+     if (!head) {
+      throw std::string("Empty");
+     }
+     Item* temp = head->next;
+     T res = head->data;
+     delete head;
+     head = temp;
+     if (!head) {
+      tail = nullptr;
+     }
+     return res;
     }
 };
 
