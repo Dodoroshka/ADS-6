@@ -29,8 +29,7 @@ void push(const T& data) {
      Item* item = create(data);
      if (!head) {
       head = tail = item;
-     }
-     if (data.prior > head->data.prior) {
+     } else if (data.prior > head->data.prior) {
       item->next = head;
       head = item;
      } else {
